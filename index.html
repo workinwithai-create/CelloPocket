@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CelloPocket · warm cello lines for finishing tracks</title>
+<meta name="description" content="Paint warm cello lines and pads over your own BPM, key and chords. Real FluidR3 cello samples. DAW-grid WAV + MIDI export.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="tap" class="tap"><div class="tapCard">
+  <div class="logo big">CELLO<span>POCKET</span></div>
+  <p>Warm cello lines and pads for the sparse track you already have.</p>
+  <div id="loadBox" class="load"><div class="loadBar"><i id="loadFill"></i></div><div id="loadTxt">Loading cello samples…</div></div>
+  <button id="tapBtn" class="btn hot">Tap to start audio</button>
+  <p class="small">On iPhone, the silent switch mutes Web Audio. Flip it off to hear the cello.</p>
+</div></div>
+
+<header class="top">
+  <div class="brand"><div class="logo">CELLO<span>POCKET</span></div><div class="tag">real cello · your BPM, key + chords · DAW-grid WAV + MIDI</div></div>
+  <div id="status" class="status">Loading cello samples…</div>
+  <div id="sampleErr" class="err" hidden></div>
+</header>
+
+<main>
+<section class="panel track">
+  <h2><b>1</b> Your track first</h2>
+  <div class="row">
+    <label>BPM <input id="bpm" type="number" min="60" max="180" step="1" value="92"></label>
+    <label>Key <select id="keyRoot"></select></label>
+    <label>Mode <select id="mode"><option value="minor">minor</option><option value="major">major</option></select></label>
+    <label class="grow">Chords (one per bar, e.g. Am F C G) <input id="chords" type="text" spellcheck="false" value="Am F C G"></label>
+    <label>Bars <select id="bars"><option>4</option><option selected>8</option></select></label>
+  </div>
+  <div id="chordNote" class="small"></div>
+</section>
+
+<section class="panel seq">
+  <div class="seqHead">
+    <h2><b>2</b> Cello recipes</h2>
+    <div class="transport">
+      <button id="play" class="btn hot">▶ Play</button>
+      <span id="pos" class="pos">bar – · beat –</span>
+      <button id="stop" class="btn ghost">■ Stop</button>
+    </div>
+  </div>
+  <div id="recipes" class="recipes"></div>
+  <div id="recipeNote" class="small"></div>
+  <div class="small hint">Select a recipe. Changes to recipe, mutes, BPM or chords apply on the next step. Stop silences everything immediately.</div>
+</section>
+
+<section class="panel mixer">
+  <h2><b>3</b> Mixer</h2>
+  <div id="strips" class="strips"></div>
+  <div class="fx">
+    <h3>Cello body</h3>
+    <label>Attack <input id="atk" type="range" min="0.01" max="0.5" step="0.01" value="0.08"><output id="atkV">0.08</output></label>
+    <label>Release <input id="rel" type="range" min="0.05" max="1.5" step="0.01" value="0.4"><output id="relV">0.40</output></label>
+    <label>Tone <input id="tone" type="range" min="0" max="1" step="0.01" value="0.6"><output id="toneV">0.60</output></label>
+  </div>
+  <div class="meterBox"><span>Master</span><canvas id="meter" width="240" height="14"></canvas></div>
+</section>
+
+<section class="panel io">
+  <h2><b>4</b> MIDI keyboard</h2>
+  <div class="row">
+    <label>MIDI in <select id="midiIn"></select></label>
+  </div>
+  <div id="midiNote" class="small"></div>
+  <div class="small">Play the cello live from your MIDI keyboard or computer keys. On-screen is fallback.</div>
+</section>
+
+<section class="panel export">
+  <h2><b>5</b> Export to your DAW</h2>
+  <div class="row">
+    <button id="wavMix" class="btn hot">⬇ WAV · cello loop</button>
+    <button id="mid" class="btn">⬇ MIDI</button>
+  </div>
+  <div id="expMsg" class="small"></div>
+  <div class="small">48 kHz · 24-bit stereo · exact bar length · downbeat at sample 0 · tail folded for seamless loop · peak ≤ −1 dBFS. Name: cellopocket-recipe-<bpm>bpm-<key>.wav</div>
+  <div class="lic"><span id="licState" class="small">Free for personal use. Commercial unlock coming via WorkinWithAI entitlement.</span></div>
+</section>
+</main>
+<footer class="small">Cello: real FluidR3_GM samples pinned to commit 044fab8e1456bfafc5776e86dfd6bb8697149aef. <a href="samples/SOURCE.md">Sample source</a> · Distinct from FluteForge, ChopFour, PianoPocket.</footer>
+<script src="app.js"></script>
+</body>
+</html>
